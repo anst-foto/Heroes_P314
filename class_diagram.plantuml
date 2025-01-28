@@ -1,0 +1,123 @@
+@startuml
+
+namespace HeroConfig {
+    class HeroConfig {
+        + health : int
+        + damage : int
+    }
+
+    HeroConfig <--* HeroesConfig
+    class HeroesConfig {
+        + mage : HeroConfig
+        + warrior : HeroConfig
+        + god : HeroConfig
+    }
+}
+
+namespace Hero {
+
+    HeroConfig.HeroConfig <.. Hero
+    abstract class Hero {
+        - name : string
+        - health : int
+        - damage : int
+
+        # Hero(name : string, health : int, damage : int)
+        # Hero(name : string, config: HeroConfig)
+
+        + getName() : string
+        
+        + setHealth(health : int) : void
+        + getHealth() : int
+
+        + getDamage() : int
+
+        + attack(enemy : Hero) : void
+    }
+
+    Hero <|-- Mage
+    class Mage {
+        + Mage(name : string, health : int, damage : int)
+        + Mage(name : string, config: HeroConfig)
+    }
+
+    Hero <|-- Warrior
+    class Warrior {
+        + Warrior(name : string, health : int, damage : int)
+        + Warrior(name : string, config: HeroConfig)
+    }
+
+    Hero <|-- God
+    class God {
+        + God(name : string, health : int, damage : int)
+        + God(name : string, config: HeroConfig)
+
+        + attack(enemy : Hero) : void
+    }
+
+}
+
+namespace HeroFactory{
+    enum HeroType {
+        HeroType_God
+        HeroType_Mage
+        HeroType_Warrior
+    }
+
+    HeroType <--* HeroFactory
+    HeroConfig.HeroesConfig <--* HeroFactory
+    Hero.Hero <.. HeroFactory
+    class HeroFactory {
+        - name : string
+        - heroType : HeroType
+        - heroesConfig : HeroesConfig
+
+        + HeroFactory(name : string, heroType : HeroType, heroesConfig : HeroesConfig)
+
+        + createHero() : Hero
+    }
+}
+
+namespace Game {
+    HeroConfig.HeroConfig <--* GameConfig
+    class GameConfig {
+        + {static} heroes_config : HeroesConfig
+        + {static} loadConfig(file_path : string) : void
+    }
+
+    Hero.Hero <--* Game
+    class Game {
+        - hero : Hero
+        - enemy : Hero
+
+        + Game(hero : Hero, enemy : Hero)
+
+        + run() : void
+        + hetWinName() : string
+    }
+}
+
+package Logger {
+    interface ILogger {
+        + {abstract} logInfo(message : string) : void
+        + {abstract} logError(message : string) : void
+    }
+
+    ILogger <|.. LogToConsole
+    class LogToConsole {
+        + logInfo(message : string) : void
+        + logError(message : string) : void
+    }
+
+    ILogger <|.. LogToFile
+    class LogToFile {
+        - file_path : string
+
+        + LogToFile(file_path : string)
+
+        + logInfo(message : string) : void
+        + logError(message : string) : void
+    }
+}
+
+@enduml
