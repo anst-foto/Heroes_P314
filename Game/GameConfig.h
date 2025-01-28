@@ -3,18 +3,13 @@
 #include <fstream>
 #include <string>
 
+#include "../HeroConfig/HeroesConfig.h"
+
 using namespace std;
 
 class GameConfig {
 public:
-    static inline int mageHealth;
-    static inline int mageDamage;
-
-    static inline int warriorHealth;
-    static inline int warriorDamage;
-
-    static inline int godHealth;
-    static inline int godDamage;
+    static inline HeroesConfig heroes_config;
 
     static void loadConfig(string file_path) {
         ifstream file;
@@ -43,12 +38,14 @@ public:
             auto warrior_health = str.substr(0, pos);
             auto warrior_damage = str.substr(pos+1);
 
-            mageHealth = stoi(mage_health);
-            mageDamage = stoi(mage_damage);
-            warriorHealth = stoi(warrior_health);
-            warriorDamage = stoi(warrior_damage);
-            godHealth = stoi(god_health);
-            godDamage = stoi(god_damage);
+            heroes_config.mage_config.health = stoi(mage_health);
+            heroes_config.mage_config.damage = stoi(mage_damage);
+
+            heroes_config.warrior_config.health = stoi(warrior_health);
+            heroes_config.warrior_config.damage = stoi(warrior_damage);
+
+            heroes_config.god_config.health = stoi(god_health);
+            heroes_config.god_config.damage = stoi(god_damage);
         }
         else {
             throw "File could not be opened";

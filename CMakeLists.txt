@@ -4,11 +4,16 @@ project(Heroes)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Heroes main.cpp
-        Hero.h
-        Mage.h
-        Warrior.h
-        Game.h
-        HeroFactory.h
-        God.h
-        HeroType.h
-        GameConfig.h)
+        Heroes/Hero.h
+        Heroes/Mage.h
+        Heroes/Warrior.h
+        Game/Game.h
+        HeroFactory/HeroFactory.h
+        Heroes/God.h
+        HeroFactory/HeroType.h
+        Game/GameConfig.h
+        HeroConfig/HeroesConfig.h
+        HeroConfig/HeroConfig.h
+        Logger/ILogger.h
+        Logger/LogToConsole.h
+        Logger/LogToFile.h)

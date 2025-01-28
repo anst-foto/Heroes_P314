@@ -1,16 +1,19 @@
 #include <iostream>
 
-#include "HeroFactory.h"
+#include "Game/Game.h"
+#include "Game/GameConfig.h"
 
-#include "Game.h"
+#include "HeroFactory/HeroFactory.h"
 
 using namespace std;
 
 void PrintHeroInfo(Hero* hero);
 
 int main() {
-    auto hero_factory = new HeroFactory("HERO", HeroType::HeroType_Mage);
-    auto enemy_factory = new HeroFactory("ENEMY", HeroType::HeroType_God);
+    GameConfig::loadConfig("game.config");
+
+    auto hero_factory = new HeroFactory("HERO", HeroType::HeroType_Mage, GameConfig::heroes_config);
+    auto enemy_factory = new HeroFactory("ENEMY", HeroType::HeroType_God, GameConfig::heroes_config);
 
     auto hero = hero_factory->createHero();
     auto enemy = enemy_factory->createHero();

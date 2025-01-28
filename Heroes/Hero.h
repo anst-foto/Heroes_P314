@@ -2,11 +2,14 @@
 
 #include <string>
 
+#include "../HeroConfig/HeroConfig.h"
+
 using namespace std;
 
 class Hero {
 private:
     string name;
+
     int health;
     int damage;
 
@@ -15,6 +18,12 @@ protected:
         this->health = health;
         this->damage = damage;
         this->name = name;
+    }
+
+    Hero(string name, HeroConfig config) {
+        this->name = name;
+        this->health = config.health;
+        this->damage = config.damage;
     }
 
 public:

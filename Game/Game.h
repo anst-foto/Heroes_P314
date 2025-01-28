@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "Hero.h"
+#include "../Heroes/Hero.h"
 
 using namespace std;
 
@@ -13,8 +13,7 @@ private:
 
 public:
     Game(Hero *hero, Hero *enemy)
-        : hero(hero),
-          enemy(enemy) {}
+        : hero(hero), enemy(enemy) {}
 
     ~Game() {
         delete hero;
