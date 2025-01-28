@@ -16,4 +16,6 @@ add_executable(Heroes main.cpp
         HeroConfig/HeroConfig.h
         Logger/ILogger.h
         Logger/LogToConsole.h
-        Logger/LogToFile.h)
+        Logger/LogToFile.h
+        Game/IGame.h
+)

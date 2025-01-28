@@ -21,7 +21,3 @@ public:
         log("ERROR", message);
     }
 };
-
-
-
-#endif //LOGTOCONSOLE_H
